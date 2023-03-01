@@ -1,0 +1,154 @@
+// reference: https://zdoom.org/wiki/SBARINFO
+// stock definition: $PROGDIR/gzdoom.pk3/sbarinfo/doom.txt
+
+// sets the status bar to the specified game
+// valid games are Doom, Heretic, Hexen, Strife, and None.
+base DOOM;
+
+// setting this to 0 (ZERO) will tell GZDoom to use a fullscreen viewport
+// so the normal statusbar will be drawn without using GRNROCK flats as borders
+height 0;
+
+// if true, continues drawing the border where the status bar is normally placed
+// using this will remove the HOM. If false, the border is not drawn behind the status bar
+CompleteBorder true;
+
+// monospaces all fonts to the specified character of their font
+// alignment changes the position of off size characters within their spacing
+MonospaceFonts true, "0", center;
+
+// keep "resolution 320, 200;" to let the hud be affected by GZDoom's scaling just like the stock StatusBar is
+// when in game, to avoid any pixel-scaling distortion, I would then suggest to either:
+//  - execute "hud_AspectScale true; hud_scale 6; vid_ScaleToHeight 1440"
+//  - execute "hud_AspectScale true; hud_scale 3; vid_ScaleToHeight 720"
+resolution 320, 200;
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// standard StatusBar, used in the automap screen
+// we define it as EMPTY, so only stats and mapname will be displayed
+StatusBar AutoMap {}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// standard StatusBar and InventoryBar, used when ScreenBlocks<=10
+// we leave both commented, so GZDoom will provide the stock resources
+//StatusBar Inventory {}
+//StatusBar Normal {}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// FullScreen InventoryBar
+// provided in case a mod makes use of it
+StatusBar InventoryFullscreen, FullscreenOffsets
+{
+	DrawInventoryBar DOOM, AlwaysShowCounter, NoArtiBox, 1, gzbFNT_FULL, -40, -31, -13, -9, gzbCLR_GLD;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// FullScreen HUD, used when ScreenBlocks=11
+// this is where the magic happens ;)
+StatusBar Fullscreen, FullscreenOffsets
+{
+	//InventoryItem
+	DrawSelectedInventory AlwaysShowCounter, gzbFNT_FULL, -40, -31, -13, -9, gzbCLR_GLD;
+
+	//keys
+	DrawString gzbFNT_FULL, gzbCLR_GRY, "KEY", 17, -41;
+	DrawKeyBar 6, horizontal, 12, 21, -41;
+
+	//weapon slots
+	DrawString gzbFNT_FULL, gzbCLR_GRY, "WEA", 17, -33;
+	DrawSwitchableImage WeaponSlot 1, "NullImage", "gzbSTY49",  21, -33;
+	DrawSwitchableImage WeaponSlot 2, "NullImage", "gzbSTY50",  30, -33;
+	DrawSwitchableImage WeaponSlot 3, "NullImage", "gzbSTY51",  39, -33;
+	DrawSwitchableImage WeaponSlot 4, "NullImage", "gzbSTY52",  48, -33;
+	DrawSwitchableImage WeaponSlot 5, "NullImage", "gzbSTY53",  57, -33;
+	DrawSwitchableImage WeaponSlot 6, "NullImage", "gzbSTY54",  66, -33;
+	DrawSwitchableImage WeaponSlot 7, "NullImage", "gzbSTY55",  75, -33;
+
+	//ammo
+	DrawString gzbFNT_FULL, gzbCLR_GRY, "AMM", 17, -25;
+	UsesSecondaryAmmo {
+		//CurrentClip
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1, FillZeros, 90, -25;
+		DrawString gzbFNT_FULL, gzbCLR_GLD, "/", 95, -25;
+		//CurrentAmmo-MaxAmmo
+		DrawBar "gzbPBGLD", "gzbPBBKG", Ammo2, horizontal, 21, -24;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo2, FillZeros, 110, -25;
+		DrawString gzbFNT_FULL, gzbCLR_GLD, "/", 115, -25;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo2Capacity, FillZeros, 130, -25;
+	} else UsesAmmo {
+		//CurrentAmmo-MaxAmmo
+		DrawBar "gzbPBGLD", "gzbPBBKG", Ammo1, horizontal, 21, -24;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1, FillZeros, 90, -25;
+		DrawString gzbFNT_FULL, gzbCLR_GLD, "/", 95, -25;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1Capacity, FillZeros, 110, -25;
+	} else {
+		//Melee
+		inInventory PowerStrength {
+			DrawString gzbFNT_FULL, gzbCLR_RED, "BSK", 90, -25;
+		} else {
+			DrawString gzbFNT_FULL, gzbCLR_GLD, "N/A", 90, -25;
+		}
+	}
+
+	//health
+	DrawString gzbFNT_FULL, gzbCLR_GRY, "HEL", 17, -17;
+	ifHealth 101 {
+		DrawBar "gzbPBBLU", "gzbPBBKG", health, horizontal, 21, -16;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_BLU, health, FillZeros, 90, -17;
+	} else
+	ifHealth 51 {
+		DrawBar "gzbPBGRN", "gzbPBBKG", health, horizontal, 21, -16;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_GRN, health, FillZeros, 90, -17;
+	} else
+	ifHealth 26 {
+		DrawBar "gzbPBGLD", "gzbPBBKG", health, horizontal, 21, -16;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, health, FillZeros, 90, -17;
+	} else {
+		DrawBar "gzbPBRED", "gzbPBBKG", health, horizontal, 21, -16;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_RED, health, FillZeros, 90, -17;
+	}
+
+	//armor
+	DrawString gzbFNT_FULL, gzbCLR_GRY, "ARM", 17, -9;
+	InInventory BasicArmor, 101 {
+		DrawBar "gzbPBBLU", "gzbPBBKG", armor, horizontal, 21, -8;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_BLU, armor, FillZeros, 90, -9;
+	} else
+	InInventory BasicArmor, 51 {
+		DrawBar "gzbPBGRN", "gzbPBBKG", armor, horizontal, 21, -8;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_GRN, armor, FillZeros, 90, -9;
+	} else
+	InInventory BasicArmor, 26 {
+		DrawBar "gzbPBGLD", "gzbPBBKG", armor, horizontal, 21, -8;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, armor, FillZeros, 90, -9;
+	} else {
+		DrawBar "gzbPBRED", "gzbPBBKG", armor, horizontal, 21, -8;
+		DrawNumber 3, gzbFNT_FULL, gzbCLR_RED, armor, FillZeros, 90, -9;
+	}
+
+	ifCvarInt gzbHUD_LevelInfo, 1, equal {
+		//kills
+		DrawNumber 4, gzbFNT_FULL, gzbCLR_GLD, kills, -35, 2;
+		DrawString gzbFNT_FULL, gzbCLR_GLD, "/", -30, 2;
+		DrawNumber 4, gzbFNT_FULL, gzbCLR_GLD, monsters, -10, 2;
+		DrawString gzbFNT_FULL, gzbCLR_GRY, "K", -2, 2;
+		//items
+		DrawNumber 4, gzbFNT_FULL, gzbCLR_GLD, items, -35, 10;
+		DrawString gzbFNT_FULL, gzbCLR_GLD, "/", -30, 10;
+		DrawNumber 4, gzbFNT_FULL, gzbCLR_GLD, totalItems, -10, 10;
+		DrawString gzbFNT_FULL, gzbCLR_GRY, "I", -2, 10;
+		//secrets
+		DrawNumber 4, gzbFNT_FULL, gzbCLR_GLD, secrets, -35, 18;
+		DrawString gzbFNT_FULL, gzbCLR_GLD, "/", -30, 18;
+		DrawNumber 4, gzbFNT_FULL, gzbCLR_GLD, totalSecrets, -10, 18;
+		DrawString gzbFNT_FULL, gzbCLR_GRY, "S", -2, 18;
+	}
+}

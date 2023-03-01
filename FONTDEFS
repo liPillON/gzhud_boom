@@ -1,0 +1,5 @@
+//boom: Full Fontset
+gzbFNT_FULL 
+{
+	TEMPLATE gzbFNT%02d
+}
