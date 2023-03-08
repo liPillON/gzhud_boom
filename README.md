@@ -8,6 +8,7 @@ Font assets taken from [here](https://forum.zdoom.org/viewtopic.php?f=19&t=25814
 
 
 Features:
+- Optional "Modern" style ([screenshot](https://raw.githubusercontent.com/liPillON/gzhud_boom/main/MODERN.png))
 - Palette-independent PNG graphics
 - UsesAmmo/UsesSecondaryAmmo support
 - InventoryBar/SelectedInventory support

@@ -21,6 +21,7 @@ OptionMenu gzbMNU_MAIN
 	StaticText ""
 	StaticText "MOD Options", Gold
 	Option "Show Level Info", gzbHUD_LevelInfo, YesNo
+	Option "Use Modern Style", gzbHUD_ModernStyle, YesNo
 }
 
 
