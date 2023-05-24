@@ -46,10 +46,10 @@ StatusBar AutoMap {}
 StatusBar InventoryFullscreen, FullscreenOffsets
 {
 	ifCvarInt gzbHUD_ModernStyle, 0, equal {
-		DrawInventoryBar DOOM, AlwaysShowCounter, NoArtiBox, 1, gzbFNT_FULL, -34, -31, -7, -11, gzbCLR_GLD;
+		DrawInventoryBar DOOM, AlwaysShowCounter, NoArtiBox, 1, gzbFNT_FULL, -33, -31, -7, -11, gzbCLR_GLD;
 	}
 	ifCvarInt gzbHUD_ModernStyle, 1, equal {
-		DrawInventoryBar DOOM, AlwaysShowCounter, NoArtiBox, 1, gzbFNT_FULL, -34, -56, -7, -36, gzbCLR_GLD;
+		DrawInventoryBar DOOM, AlwaysShowCounter, NoArtiBox, 1, gzbFNT_FULL, -33, -48, -7, -28, gzbCLR_GLD;
 	}
 }
 
@@ -62,7 +62,7 @@ StatusBar Fullscreen, FullscreenOffsets
 {
 	ifCvarInt gzbHUD_ModernStyle, 0, equal {
 		//InventoryItem
-		DrawSelectedInventory AlwaysShowCounter, gzbFNT_FULL, -34, -31, -7, -11, gzbCLR_GLD;
+		DrawSelectedInventory AlwaysShowCounter, gzbFNT_FULL, -33, -31, -7, -11, gzbCLR_GLD;
 
 		//keys
 		DrawString gzbFNT_FULL, gzbCLR_GRY, "KEY", 17, -41;
@@ -81,17 +81,18 @@ StatusBar Fullscreen, FullscreenOffsets
 		//ammo
 		DrawString gzbFNT_FULL, gzbCLR_GRY, "AMM", 17, -25;
 		UsesSecondaryAmmo {
+			DrawBar "gzbPBGLD", "gzbPBBKG", Ammo2, horizontal, 21, -24;
+			DrawBar "gzbPBCLP", "gzbPBBKG", Ammo1, horizontal, 21, -24;
 			//CurrentClip
 			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1, FillZeros, 90, -25;
 			DrawString gzbFNT_FULL, gzbCLR_GLD, "/", 95, -25;
 			//CurrentAmmo-MaxAmmo
-			DrawBar "gzbPBGLD", "gzbPBBKG", Ammo2, horizontal, 21, -24;
 			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo2, FillZeros, 110, -25;
 			DrawString gzbFNT_FULL, gzbCLR_GLD, "/", 115, -25;
 			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo2Capacity, FillZeros, 130, -25;
 		} else UsesAmmo {
-			//CurrentAmmo-MaxAmmo
 			DrawBar "gzbPBGLD", "gzbPBBKG", Ammo1, horizontal, 21, -24;
+			//CurrentAmmo-MaxAmmo
 			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1, FillZeros, 90, -25;
 			DrawString gzbFNT_FULL, gzbCLR_GLD, "/", 95, -25;
 			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1Capacity, FillZeros, 110, -25;
@@ -145,87 +146,83 @@ StatusBar Fullscreen, FullscreenOffsets
 
 	ifCvarInt gzbHUD_ModernStyle, 1, equal {
 		//InventoryItem
-		DrawSelectedInventory AlwaysShowCounter, gzbFNT_FULL, -34, -56, -7, -36, gzbCLR_GLD;
+		DrawSelectedInventory AlwaysShowCounter, gzbFNT_FULL, -33, -48, -7, -28, gzbCLR_GLD;
 
 		//keys
-		DrawString gzbFNT_FULL, gzbCLR_GRY, "KEY", 17, -9;
-		DrawKeyBar 6, horizontal, 12, 21, -9;
+		DrawString gzbFNT_FULL, gzbCLR_GRY, "KEY", 17, -25;
+		DrawKeyBar 6, horizontal, 12, 21, -25;
 
-		//health
-		DrawString gzbFNT_FULL, gzbCLR_GRY, "HEL", 17, -17;
-		ifHealth 101 {
-			DrawBar "gzbPBBLU", "gzbPBDRK", health, horizontal, 21, -16;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_BLU, health, FillZeros, 90, -17;
-		} else
-		ifHealth 51 {
-			DrawBar "gzbPBGRN", "gzbPBDRK", health, horizontal, 21, -16;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_GRN, health, FillZeros, 90, -17;
-		} else
-		ifHealth 26 {
-			DrawBar "gzbPBGLD", "gzbPBDRK", health, horizontal, 21, -16;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, health, FillZeros, 90, -17;
+		//weapon slots
+		DrawString gzbFNT_FULL, gzbCLR_GRY, "WEA", 17, -17;
+		DrawSwitchableImage WeaponSlot 1, "NullImage", "gzbSTY49",  21, -17;
+		DrawSwitchableImage WeaponSlot 2, "NullImage", "gzbSTY50",  30, -17;
+		DrawSwitchableImage WeaponSlot 3, "NullImage", "gzbSTY51",  39, -17;
+		DrawSwitchableImage WeaponSlot 4, "NullImage", "gzbSTY52",  48, -17;
+		DrawSwitchableImage WeaponSlot 5, "NullImage", "gzbSTY53",  57, -17;
+		DrawSwitchableImage WeaponSlot 6, "NullImage", "gzbSTY54",  66, -17;
+		DrawSwitchableImage WeaponSlot 7, "NullImage", "gzbSTY55",  75, -17;
+
+		//ammo
+		DrawString gzbFNT_FULL, gzbCLR_GRY, "AMM", 17, -9;
+		UsesSecondaryAmmo {
+			DrawBar "gzbPBGLD", "gzbPBDRK", Ammo2, horizontal, 21, -8;
+			DrawBar "gzbPBCLP", "gzbPBBKG", Ammo1, horizontal, 21, -8;
+			//CurrentClip
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1, FillZeros, 90, -9;
+			DrawString gzbFNT_FULL, gzbCLR_GLD, "/", 95, -9;
+			//CurrentAmmo-MaxAmmo
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo2, FillZeros, 110, -9;
+			DrawString gzbFNT_FULL, gzbCLR_GLD, "/", 115, -9;
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo2Capacity, FillZeros, 130, -9;
+		} else UsesAmmo {
+			DrawBar "gzbPBGLD", "gzbPBDRK", Ammo1, horizontal, 21, -8;
+			//CurrentAmmo-MaxAmmo
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1, FillZeros, 90, -9;
+			DrawString gzbFNT_FULL, gzbCLR_GLD, "/", 95, -9;
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1Capacity, FillZeros, 110, -9;
 		} else {
-			DrawBar "gzbPBRED", "gzbPBDRK", health, horizontal, 21, -16;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_RED, health, FillZeros, 90, -17;
+			//Melee
+			inInventory PowerStrength {
+				DrawString gzbFNT_FULL, gzbCLR_RED, "BSK", 90, -9;
+			} else {
+				DrawString gzbFNT_FULL, gzbCLR_GLD, "N/A", 90, -9;
+			}
 		}
 
 		//armor
-		DrawString gzbFNT_FULL, gzbCLR_GRY, "ARM", 17, -25;
+		DrawString gzbFNT_FULL, gzbCLR_GRY, "ARM", -2, -17;
 		InInventory BasicArmor, 101 {
-			DrawBar "gzbPBBLU", "gzbPBDRK", armor, horizontal, 21, -24;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_BLU, armor, FillZeros, 90, -25;
+			DrawBar "gzbPBBLU", "gzbPBDRK", armor, horizontal, reverse, -71, -16;
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_BLU, armor, FillZeros, -75, -17;
 		} else
 		InInventory BasicArmor, 51 {
-			DrawBar "gzbPBGRN", "gzbPBDRK", armor, horizontal, 21, -24;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_GRN, armor, FillZeros, 90, -25;
+			DrawBar "gzbPBGRN", "gzbPBDRK", armor, horizontal, reverse, -71, -16;
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_GRN, armor, FillZeros, -75, -17;
 		} else
 		InInventory BasicArmor, 26 {
-			DrawBar "gzbPBGLD", "gzbPBDRK", armor, horizontal, 21, -24;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, armor, FillZeros, 90, -25;
+			DrawBar "gzbPBGLD", "gzbPBDRK", armor, horizontal, reverse, -71, -16;
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, armor, FillZeros, -75, -17;
 		} else {
-			DrawBar "gzbPBRED", "gzbPBDRK", armor, horizontal, 21, -24;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_RED, armor, FillZeros, 90, -25;
+			DrawBar "gzbPBRED", "gzbPBDRK", armor, horizontal, reverse, -71, -16;
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_RED, armor, FillZeros, -75, -17;
 		}
 
-		//weapon slots
-		DrawString gzbFNT_FULL, gzbCLR_GRY, "WEA", -2, -9;
-		DrawSwitchableImage WeaponSlot 1, "NullImage", "gzbSTY49", -26, -9;
-		DrawSwitchableImage WeaponSlot 2, "NullImage", "gzbSTY50", -35, -9;
-		DrawSwitchableImage WeaponSlot 3, "NullImage", "gzbSTY51", -44, -9;
-		DrawSwitchableImage WeaponSlot 4, "NullImage", "gzbSTY52", -53, -9;
-		DrawSwitchableImage WeaponSlot 5, "NullImage", "gzbSTY53", -62, -9;
-		DrawSwitchableImage WeaponSlot 6, "NullImage", "gzbSTY54", -71, -9;
-		DrawSwitchableImage WeaponSlot 7, "NullImage", "gzbSTY55", -80, -9;
-
-		//ammo
-		UsesSecondaryAmmo {
-			//CurrentClip
-			DrawString gzbFNT_FULL, gzbCLR_GRY, "CLP", -2, -25;
-			DrawBar "gzbPBGLD", "gzbPBDRK", Ammo1, horizontal, reverse, -71, -24;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1, -95, -25;
-			DrawString gzbFNT_FULL, gzbCLR_GLD, "/", -90, -25;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1Capacity, FillZeros, -75, -25;
-			//CurrentAmmo-MaxAmmo
-			DrawString gzbFNT_FULL, gzbCLR_GRY, "AMM", -2, -17;
-			DrawBar "gzbPBGLD", "gzbPBDRK", Ammo2, horizontal, reverse, -71, -16;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo2, -95, -17;
-			DrawString gzbFNT_FULL, gzbCLR_GLD, "/", -90, -17;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo2Capacity, FillZeros, -75, -17;
-		} else UsesAmmo {
-			//CurrentAmmo-MaxAmmo
-			DrawString gzbFNT_FULL, gzbCLR_GRY, "AMM", -2, -17;
-			DrawBar "gzbPBGLD", "gzbPBDRK", Ammo1, horizontal, reverse, -71, -16;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1, -95, -17;
-			DrawString gzbFNT_FULL, gzbCLR_GLD, "/", -90, -17;
-			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, Ammo1Capacity, FillZeros, -75, -17;
+		//health
+		DrawString gzbFNT_FULL, gzbCLR_GRY, "HEL", -2, -9;
+		ifHealth 101 {
+			DrawBar "gzbPBBLU", "gzbPBDRK", health, horizontal, reverse, -71, -8;
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_BLU, health, FillZeros, -75, -9;
+		} else
+		ifHealth 51 {
+			DrawBar "gzbPBGRN", "gzbPBDRK", health, horizontal, reverse, -71, -8;
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_GRN, health, FillZeros, -75, -9;
+		} else
+		ifHealth 26 {
+			DrawBar "gzbPBGLD", "gzbPBDRK", health, horizontal, reverse, -71, -8;
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_GLD, health, FillZeros, -75, -9;
 		} else {
-			DrawString gzbFNT_FULL, gzbCLR_GRY, "AMM", -2, -17;
-			//Melee
-			inInventory PowerStrength {
-				DrawString gzbFNT_FULL, gzbCLR_RED, "BSK", -21, -17;
-			} else {
-				DrawString gzbFNT_FULL, gzbCLR_GLD, "N/A", -21, -17;
-			}
+			DrawBar "gzbPBRED", "gzbPBDRK", health, horizontal, reverse, -71, -8;
+			DrawNumber 3, gzbFNT_FULL, gzbCLR_RED, health, FillZeros, -75, -9;
 		}
 
 	} // Modern Style
