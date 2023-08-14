@@ -21,6 +21,7 @@ OptionMenu gzbMNU_MAIN
 	StaticText ""
 	StaticText "MOD Options", Gold
 	Option "Show Level Info", gzbHUD_LevelInfo, YesNo
+	Option "BOOM: Draw Graph Bars", gzhudb_BoomBars, YesNo
 	Option "BOOM: HUD Style", gzhudb_BoomStyle, gzBoomStyle
 }
 
