@@ -1,5 +1,65 @@
-//boom: Full Fontset
-gzbFNT_FULL 
+//full BOOM fontset
+gzbFNT_FULL
 {
 	TEMPLATE gzbFNT%02d
 }
+
+//stats/timers fonts
+myIndexFont
+{
+	template MYIDX%03d
+}
+
+//stock iwad/pwad message font
+idSmallFont
+{
+   Template STCFN%03d
+}
+
+//stock iwad/pwad BigNum font
+idStatusFont
+{
+	0 STTNUM0
+	1 STTNUM1
+	2 STTNUM2
+	3 STTNUM3
+	4 STTNUM4
+	5 STTNUM5
+	6 STTNUM6
+	7 STTNUM7
+	8 STTNUM8
+	9 STTNUM9
+	% STTPRCNT
+	- STTMINUS
+}
+
+//stock iwad/pwad SmallNum font (Yellow)
+idIndexFontY
+{
+	0 STYSNUM0
+	1 STYSNUM1
+	2 STYSNUM2
+	3 STYSNUM3
+	4 STYSNUM4
+	5 STYSNUM5
+	6 STYSNUM6
+	7 STYSNUM7
+	8 STYSNUM8
+	9 STYSNUM9
+}
+
+//stock iwad/pwad SmallNum font (Gray)
+idIndexFontG
+{
+	0 STGNUM0
+	1 STGNUM1
+	2 STGNUM2
+	3 STGNUM3
+	4 STGNUM4
+	5 STGNUM5
+	6 STGNUM6
+	7 STGNUM7
+	8 STGNUM8
+	9 STGNUM9
+}
+
