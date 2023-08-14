@@ -21,7 +21,7 @@ OptionMenu gzbMNU_MAIN
 	StaticText ""
 	StaticText "MOD Options", Gold
 	Option "Show Level Info", gzbHUD_LevelInfo, YesNo
-	Option "Use Modern Style", gzbHUD_ModernStyle, YesNo
+	Option "BOOM: HUD Style", gzhudb_BoomStyle, gzBoomStyle
 }
 
 
@@ -64,4 +64,10 @@ OptionValue gzHUDScalingFactor
 	 7, "7x (1680p)"
 	 8, "8x (1920p)"
 	 9, "9x (2160p)"
+}
+
+OptionValue gzBoomStyle
+{
+	0, "Classic"
+	1, "Modern"
 }

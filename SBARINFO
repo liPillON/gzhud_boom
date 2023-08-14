@@ -45,10 +45,10 @@ StatusBar AutoMap {}
 // provided in case a mod makes use of it
 StatusBar InventoryFullscreen, FullscreenOffsets
 {
-	ifCvarInt gzbHUD_ModernStyle, 0, equal {
+	ifCvarInt gzhudb_BoomStyle, 0, equal {
 		DrawInventoryBar DOOM, AlwaysShowCounter, NoArtiBox, 1, gzbFNT_FULL, -33, -31, -7, -11, gzbCLR_GLD;
 	}
-	ifCvarInt gzbHUD_ModernStyle, 1, equal {
+	ifCvarInt gzhudb_BoomStyle, 1, equal {
 		DrawInventoryBar DOOM, AlwaysShowCounter, NoArtiBox, 1, gzbFNT_FULL, -33, -48, -7, -28, gzbCLR_GLD;
 	}
 }
@@ -60,7 +60,7 @@ StatusBar InventoryFullscreen, FullscreenOffsets
 // this is where the magic happens ;)
 StatusBar Fullscreen, FullscreenOffsets
 {
-	ifCvarInt gzbHUD_ModernStyle, 0, equal {
+	ifCvarInt gzhudb_BoomStyle, 0, equal {
 		//InventoryItem
 		DrawSelectedInventory AlwaysShowCounter, gzbFNT_FULL, -33, -31, -7, -11, gzbCLR_GLD;
 
@@ -144,7 +144,7 @@ StatusBar Fullscreen, FullscreenOffsets
 	} // Classic Style
 
 
-	ifCvarInt gzbHUD_ModernStyle, 1, equal {
+	ifCvarInt gzhudb_BoomStyle, 1, equal {
 		//InventoryItem
 		DrawSelectedInventory AlwaysShowCounter, gzbFNT_FULL, -33, -48, -7, -28, gzbCLR_GLD;
 
