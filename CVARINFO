@@ -1,4 +1,5 @@
-user bool gzbHUD_LevelInfo = false;
+user bool gzhudb_LevelStats = false;
+user bool gzhudb_PowerupTimers = false;
 
 user bool gzhudb_BoomBars = true;
 user int gzhudb_BoomStyle = 0;

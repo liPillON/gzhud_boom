@@ -228,7 +228,7 @@ StatusBar Fullscreen, FullscreenOffsets
 	} // Modern Style
 
 
-	ifCvarInt gzbHUD_LevelInfo, 1, equal {
+	ifCvarInt gzhudb_LevelStats, 1, equal {
 		//kills
 		DrawNumber 4, gzbFNT_FULL, gzbCLR_GLD, kills, -35, 2;
 		DrawString gzbFNT_FULL, gzbCLR_GLD, "/", -30, 2;

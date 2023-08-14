@@ -20,7 +20,8 @@ OptionMenu gzbMNU_MAIN
 	Option "Keep Aspect Ratio", hud_aspectscale, YesNo
 	StaticText ""
 	StaticText "MOD Options", Gold
-	Option "Show Level Info", gzbHUD_LevelInfo, YesNo
+	Option "Show Level Stats", gzhudb_LevelStats, YesNo
+	Option "Show Powerup Timers", gzhudb_PowerupTimers, YesNo
 	Option "BOOM: Draw Graph Bars", gzhudb_BoomBars, YesNo
 	Option "BOOM: HUD Style", gzhudb_BoomStyle, gzBoomStyle
 }
